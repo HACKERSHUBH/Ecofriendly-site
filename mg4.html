@@ -1,0 +1,70 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <title>Recycling</title>
+    <style>
+        img {
+            position: absolute;
+        }
+        div {
+            position: absolute;
+            width: 700px;
+            height: 500px;
+        }
+        #rightSide {
+            left: 680px;
+            border-left: 1px solid black;
+        }
+    </style>
+</head>
+<body bgcolor="#d7e2e8">
+    <h2><center>RECYCLE EXTRA PRODUCT</h2>
+    <h4><p><center>In this Game, Webpage Is Divided For two person. One Is The Perfect Citizen as He Continously Uses Recycling and reduces the extra product that is not needed While another one i.e. you, is Not a Good Citizen.In Order To Be a Good Citizen,You Have To Recycle The Extra Paper Which you have instead Of trashing it. This Can Be Done By Clicking On The Extra Paper Appears On your Column(left side).</p></h4>
+    <div id="leftSide">
+	
+    </div>
+    <div id="rightSide">
+	
+    </div>
+    <script>
+        var numberOfFaces = 2;
+        var theLeftSide = document.getElementById("leftSide");
+        var theRightSide = document.getElementById("rightSide");
+        var theBody = document.getElementsByTagName("body")[0];
+        
+        function generateProducts() {
+            while (theLeftSide.firstChild) {
+                theLeftSide.removeChild(theLeftSide.firstChild);
+            }
+            while (theRightSide.firstChild) {
+                theRightSide.removeChild(theRightSide.firstChild);
+            }
+            for (i = 0; i < numberOfFaces; ++ i) {
+                elem_img = document.createElement("img");
+                elem_img.src = "http://findicons.com/files/icons/575/pleasant/128/default_icon.png"
+                elem_img.style.top = Math.floor(Math.random() * 401) + "px";
+                elem_img.style.left = Math.floor(Math.random() * 401) + "px";
+                theLeftSide.appendChild(elem_img);
+            }
+            
+            leftSideImages = theLeftSide.cloneNode(true);
+            leftSideImages.removeChild(leftSideImages.lastChild);
+            theRightSide.appendChild(leftSideImages);
+            
+            theLeftSide.lastChild.onclick = function nextLevel(event){
+                event.stopPropagation();
+                numberOfFaces += 3;
+                generateProducts();
+            }
+        }
+        generateProducts();
+        
+        
+        theBody.onclick = function gameOver() {
+            alert("Game Over!");
+            theBody.onclick = null;
+            theLeftSide.lastChild.onclick = null;
+        }
+    </script>
+</body>
+</html>
